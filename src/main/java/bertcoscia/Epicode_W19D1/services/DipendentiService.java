@@ -68,4 +68,8 @@ public class DipendentiService {
         this.repository.save(found);
     }
 
+    public Dipendente findByEmail(String email) {
+        return this.repository.findByEmail(email).orElseThrow(() -> new NotFoundException(email));
+    }
+
 }
