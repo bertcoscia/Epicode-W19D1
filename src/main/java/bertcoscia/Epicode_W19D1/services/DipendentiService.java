@@ -29,7 +29,7 @@ public class DipendentiService {
     public Dipendente save(NewDipendenteDTO body) {
         if (this.repository.existsByUsername(body.username())) throw new BadRequestException("Username già esistente");
         if (this.repository.existsByEmail(body.email())) throw new BadRequestException("Email già esistente");
-        Dipendente newDipendente = new Dipendente(body.username(), body.nome(), body.cognome(), body.email());
+        Dipendente newDipendente = new Dipendente(body.username(), body.nome(), body.cognome(), body.email(), body.password());
         newDipendente.setUrlAvatar("https://ui-avatars.com/api/?name=" + newDipendente.getNome() + "+" + newDipendente.getCognome());
         return this.repository.save(newDipendente);
     }
@@ -52,6 +52,7 @@ public class DipendentiService {
         found.setNome(body.getNome());
         found.setCognome(body.getCognome());
         found.setUsername(body.getUsername());
+        found.setPassword(body.getPassword());
         return this.repository.save(found);
     }
 
